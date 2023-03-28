@@ -1,7 +1,9 @@
-# config-qual
+# config-util
 ## What is this?
 
-This projects holds annotations and relevant classes for those classes, so that checkers for the correct use of the annotations can be written.
+This project allows building configuration files using any type.
+You only need to provide a IConfigLoader, which can load the configuration file and a IConfigSaver, which can save the configuration file.
+Anything else is handled by this project.
 
 ## About Semver:
 
