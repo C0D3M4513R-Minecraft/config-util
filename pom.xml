@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.c0d3m4513r.pom</groupId>
+        <artifactId>plugins</artifactId>
+        <version>0.1.0</version>
+    </parent>
+
+    <groupId>com.c0d3m4513r.config</groupId>
+    <artifactId>util</artifactId>
+    <version>1.0.0</version>
+
+    <licenses>
+        <license>
+            <name>All-Rights-Reserved</name>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/Pixel-gaming/config-util</url>
+        <connection>scm:git</connection>
+    </scm>
+
+    <name>config-util</name>
+    <description>Allows building configuration files of any type.</description>
+    <url>https://github.com/Pixel-gaming/config-util</url>
+
+    <developers>
+        <developer>
+            <id>c0d3m4513r</id>
+            <name>C0D3 M4513R</name>
+            <url>https://c0d3m4513r.com/</url>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <id>c0d3m4513r</id>
+            <name>C0D3M4513R's nexus maven repo - Release and Snapshot</name>
+            <url>https://nexus.c0d3m4513r.com/repository/c0d3m4513r/</url>
+            <snapshots/>
+            <releases/>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.c0d3m4513r</groupId>
+            <artifactId>Logger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.c0d3m4513r.config</groupId>
+            <artifactId>qual</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>Config</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

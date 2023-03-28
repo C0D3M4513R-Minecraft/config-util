@@ -1,0 +1,175 @@
+package java.util.concurrent;
+
+import org.checkerframework.dataflow.qual.Pure;
+
+public enum TimeUnit {
+    NANOSECONDS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+
+
+    MICROSECONDS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+
+
+    MILLISECONDS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+
+
+    SECONDS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+
+
+    MINUTES {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+
+
+    HOURS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    },
+    DAYS {
+        @Pure
+        public long toNanos(long d);
+        @Pure
+        public long toMicros(long d);
+        @Pure
+        public long toMillis(long d);
+        @Pure
+        public long toSeconds(long d);
+        @Pure
+        public long toMinutes(long d);
+        @Pure
+        @Pure
+        public long toHours(long d);
+        @Pure
+        public long toDays(long d);
+        @Pure
+        public long convert(long d, TimeUnit u);
+        @Pure
+        int excessNanos(long d, long m);
+    };
+    @Pure
+    public long convert(long sourceDuration, TimeUnit sourceUnit);
+    @Pure
+    public long toNanos(long duration);
+    @Pure
+    public long toMicros(long duration);
+    @Pure
+    public long toMillis(long duration);
+    @Pure
+    public long toSeconds(long duration);
+    @Pure
+    public long toMinutes(long duration);
+    @Pure
+    public long toHours(long duration);
+    @Pure
+    public long toDays(long duration);
+    @Pure
+    abstract int excessNanos(long d, long m);
+}

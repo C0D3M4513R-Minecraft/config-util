@@ -1,0 +1,31 @@
+package java.lang;
+
+import org.checkerframework.checker.index.qual.LessThanUnknown;
+import org.checkerframework.checker.index.qual.LowerBoundUnknown;
+import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.index.qual.SameLenUnknown;
+import org.checkerframework.checker.index.qual.SearchIndexUnknown;
+import org.checkerframework.checker.index.qual.SubstringIndexBottom;
+import org.checkerframework.checker.index.qual.SubstringIndexUnknown;
+import org.checkerframework.checker.index.qual.UpperBoundUnknown;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.checkerframework.checker.lock.qual.GuardSatisfied;
+import org.checkerframework.checker.lock.qual.GuardedBy;
+import org.checkerframework.checker.lock.qual.GuardedByUnknown;
+import org.checkerframework.checker.lock.qual.LockPossiblyHeld;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNullIf;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.UnknownKeyFor;
+import org.checkerframework.common.value.qual.UnknownVal;
+import org.checkerframework.dataflow.qual.Pure;
+import org.checkerframework.dataflow.qual.SideEffectFree;
+
+public abstract class Enum<@SubstringIndexBottom E extends @SubstringIndexUnknown @UnknownVal @SearchIndexUnknown @SameLenUnknown @LessThanUnknown @LowerBoundUnknown @UpperBoundUnknown @LockPossiblyHeld @GuardedBy @UnknownKeyFor @NonNull @Initialized Enum<E>>
+implements Comparable<E>,
+Serializable {
+    @Pure
+    public final @SubstringIndexUnknown @UnknownVal @SearchIndexUnknown @SameLenUnknown @LessThanUnknown @LowerBoundUnknown @UpperBoundUnknown @LockPossiblyHeld @GuardedBy @UnknownKeyFor @NonNull @Initialized String name(@GuardedByUnknown Enum<E> this);
+    @Pure
+    public final @NonNegative @SubstringIndexUnknown @SearchIndexUnknown @SameLenUnknown @LessThanUnknown @UpperBoundUnknown @LockPossiblyHeld @GuardedBy @UnknownKeyFor @NonNull @Initialized int ordinal();
+}

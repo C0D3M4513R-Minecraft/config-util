@@ -1,0 +1,143 @@
+package java.math;
+
+import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.common.value.qual.ArrayLen;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.dataflow.qual.Pure;
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.checker.index.qual.Positive;
+import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.index.qual.GTENegativeOne;
+import org.checkerframework.checker.index.qual.PolyLowerBound;
+import org.checkerframework.checker.index.qual.PolyUpperBound;
+
+
+public class BigInteger extends Number implements Comparable<BigInteger>{
+    @NonNull
+    @SideEffectFree
+    public static BigInteger valueOf(long val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger abs();
+    @NonNull
+    @SideEffectFree
+    public BigInteger add(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger subtract(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger multiply(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger divide(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger remainder(@NonNull BigInteger val);
+    @ArrayLen(2)
+    @SideEffectFree
+    @NonNull
+    public BigInteger[] divideAndRemainder(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger pow(int exponent);
+    @NonNull
+    @SideEffectFree
+    public BigInteger gcd(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger negate();
+    @Pure
+    @IntRange(from = -1, to = 1)
+    public int signum();
+    @NonNull
+    @SideEffectFree
+    public BigInteger mod(@NonNull BigInteger m);
+    @NonNull
+    @SideEffectFree
+    public BigInteger modPow(@NonNull BigInteger exponent, @NonNull BigInteger m);
+    @NonNull
+    @SideEffectFree
+    public BigInteger modInverse(@NonNull BigInteger m);
+    @NonNull
+    @SideEffectFree
+    public BigInteger shiftLeft(int n);
+    @NonNull
+    @SideEffectFree
+    public BigInteger shiftRight(int n);
+    @NonNull
+    @SideEffectFree
+    public BigInteger and(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger or(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger xor(@NonNull BigInteger val);
+    @NonNull
+    @SideEffectFree
+    public BigInteger not();
+    @NonNull
+    @SideEffectFree
+    public BigInteger andNot(@NonNull BigInteger val);
+    @Pure
+    public boolean testBit(@NonNegative int n);
+    @SideEffectFree
+    @NonNull
+    public BigInteger setBit(@NonNegative int n);
+    @SideEffectFree
+    @NonNull
+    public BigInteger clearBit(@NonNegative int n);
+    @SideEffectFree
+    @NonNull
+    public BigInteger flipBit(@NonNegative int n);
+    @Pure
+    @GTENegativeOne
+    public int getLowestSetBit();
+    @Pure
+    @NonNegative
+    public int bitLength();
+    @Pure
+    @NonNegative
+    public int bitCount();
+    @Pure
+    public boolean isProbablePrime(int certainty);
+    @Pure
+    @org.checkerframework.checker.interning.qual.CompareToMethod
+    public int compareTo(@NonNull BigInteger val);
+    @Pure
+    public boolean equals(Object x);
+    @Pure
+    @NonNull
+    public @PolyLowerBound BigInteger min(@PolyLowerBound BigInteger this, @PolyLowerBound @NonNull BigInteger val);
+    @Pure
+    @NonNull
+    public BigInteger max(@PolyUpperBound BigInteger this, @PolyUpperBound @NonNull BigInteger val);
+    @Pure
+    public int hashCode();
+    @Pure
+    @NonNull
+    public String toString(int radix);
+    @Pure
+    @NonNull
+    public String toString();
+    @SideEffectFree
+    @NonNull
+    public byte[] toByteArray();
+    @Pure
+    public int intValue();
+    @Pure
+    public long longValue();
+    @Pure
+    public float floatValue();
+    @Pure
+    public double doubleValue();
+    @Pure
+    public long longValueExact();
+    @Pure
+    public int intValueExact();
+    @Pure
+    public short shortValueExact();
+    @Pure
+    public byte byteValueExact();
+}
