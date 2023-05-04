@@ -7,6 +7,7 @@ Anything else is handled by this project.
 
 ## About Semver:
 
+## Exclusions I will give for Semver:
 I generally strive to use [semantic versioning](https://semver.org/) for all my projects.
 But there are a few exceptions I have to communicate here (mainly because I have seen enough stuff in minecraft projects):
 - The implementation of methods and Classes can change, even in Patch releases.
@@ -16,7 +17,15 @@ But there are a few exceptions I have to communicate here (mainly because I have
 
 This means, that any java bytecode manipulation or java reflection may break in Patch releases.
 
+
 These rules are only in place, because I publish as java-version 8. If I had java modules, I would probably not have to add these notes.
+
+## Guarantees I will give for Semver:
+For the Dependencies of this project will only be updated in the same or more restrictive way as the project.
+If this project has a patch version bump, then any dependency can also be bumped by a patch version.
+If this project has a minor version bump, then any dependency can be bumped by a minor or patch version.
+If this project has a major version bump, then anything might happen to dependencies.
+
 
 # About the license:
 
