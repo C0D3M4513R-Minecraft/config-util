@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.c0d3m4513r.pom</groupId>
         <artifactId>plugins</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </parent>
 
     <groupId>com.c0d3m4513r.config</groupId>
     <artifactId>util</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <licenses>
         <license>
@@ -54,7 +54,6 @@
         <dependency>
             <groupId>com.c0d3m4513r.config</groupId>
             <artifactId>qual</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -88,7 +87,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
-
 </project>
