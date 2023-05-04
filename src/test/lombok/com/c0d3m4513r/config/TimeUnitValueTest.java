@@ -1,6 +1,7 @@
 package com.c0d3m4513r.config;
 
 import com.c0d3m4513r.LoggerUtils;
+import com.c0d3m4513r.Tuple;
 import com.c0d3m4513r.logger.Logging;
 import lombok.val;
 import lombok.var;
@@ -68,8 +69,9 @@ public class TimeUnitValueTest {
         val unit = entry.getRight();
         final String parse = value + unitString;
         Logging.INSTANCE.info("Parsing: {}", parse);
-        val retValue = TimeUnitValue.ofInternal(parse);
-        val timeUnitValue = retValue.getRight();
+        final @Nullable Tuple<@NonNull String, @Nullable TimeUnitValue> retValue = TimeUnitValue.ofInternal(parse);
+        assertNotNull(retValue);
+        final @Nullable TimeUnitValue timeUnitValue = retValue.getRight();
         assertEquals("", retValue.getLeft(), "Expected remaining string to be empty");
         assertNotNull(timeUnitValue);
         assertEquals(unit, timeUnitValue.getUnit());
@@ -93,7 +95,8 @@ public class TimeUnitValueTest {
         TimeUnitValue parsed;
         int i = timeUnitValues.size();
         do {
-            val retValue = TimeUnitValue.ofInternal(remaining);
+            final @Nullable Tuple<@NonNull String, @Nullable TimeUnitValue> retValue = TimeUnitValue.ofInternal(remaining);
+            assertNotNull(retValue);
             remaining = retValue.getLeft();
             parsed = retValue.getRight();
             if (--i < 0) fail("Parsed more elements than expected.");
@@ -114,9 +117,7 @@ public class TimeUnitValueTest {
         final String parse = value + unitString;
         Logging.INSTANCE.info("Parsing: {}", parse);
         final TimeUnitValue timeUnitValue = TimeUnitValue.of(parse);
-        if(timeUnitValue == null){
-            fail("TimeUnitValue is null");
-        }
+        assertNotNull(timeUnitValue);
         Logging.INSTANCE.info("Parsed: {} as {}", parse, timeUnitValue);
         assertEquals(unit, timeUnitValue.getUnit());
         assertEquals(value, timeUnitValue.getValue());
@@ -127,7 +128,7 @@ public class TimeUnitValueTest {
     @DisplayName("Test TimeUnitValue#of(String, String)")
     public void testParseTimeUnitValueSeperateUnitValue(final ImmutableTriple<String, Long, TimeUnit> entry){
         val value = entry.getMiddle();
-        val parsed = TimeUnitValue.of(value.toString(), entry.getLeft());
+        val parsed = TimeUnitValue.of(entry.getLeft(), value.toString());
         assertNotNull(parsed);
         assertEquals(parsed.getValue(), value);
         assertEquals(parsed.getUnit(), entry.getRight());
