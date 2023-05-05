@@ -54,6 +54,17 @@ public abstract class SuperConfigEntry<V,T> implements IConfigLoadableSaveable {
     public SuperConfigEntry(@NonNull final ClassValue<V,T> value, @NonNull final String configPath){
         this(value,configPath,true,ConfigStorage.configStorage);
     }
+    /**
+     * Creates a new ConfigEntry, with the specified value, type and config path.
+     * The value will be printed to the console when it changes.
+     * @param value The type and value to be stored in the config
+     * @param configPath The path to the config value
+     * @param storage The config loader and saver that will be used
+     */
+    @SideEffectFree
+    public SuperConfigEntry(@NonNull final ClassValue<V,T> value, @NonNull final String configPath, @NonNull IConfigStorage storage){
+        this(value,configPath,true,storage);
+    }
 
     /**
      * Creates a new ConfigEntry, with the specified value, type and config path.
