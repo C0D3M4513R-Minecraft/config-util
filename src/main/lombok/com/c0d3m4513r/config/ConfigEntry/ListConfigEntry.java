@@ -1,6 +1,7 @@
 package com.c0d3m4513r.config.ConfigEntry;
 
 import com.c0d3m4513r.config.ClassValue;
+import com.c0d3m4513r.config.ConfigStorage;
 import com.c0d3m4513r.config.iface.provider.IConfigStorage;
 import lombok.EqualsAndHashCode;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -18,6 +19,7 @@ public class ListConfigEntry<T> extends SuperConfigEntry<List<T>,T>{
 
     /**
      * Creates a new ConfigEntry, with the specified value, type and config path.
+     * Will pull the config storage from the {@link ConfigStorage} class.
      * The value will be printed to the console when it changes.
      * @param value The type and value to be stored in the config
      * @param configPath The path to the value in the config
@@ -26,9 +28,21 @@ public class ListConfigEntry<T> extends SuperConfigEntry<List<T>,T>{
     public ListConfigEntry(@NonNull final ClassValue<List<T>, T> value, @NonNull final String configPath) {
         super(value,configPath);
     }
+    /**
+     * Creates a new ConfigEntry, with the specified value, type and config path.
+     * The value will be printed to the console when it changes.
+     * @param value The type and value to be stored in the config
+     * @param configPath The path to the value in the config
+     * @param storage The config storage to use
+     */
+    @SideEffectFree
+    public ListConfigEntry(@NonNull final ClassValue<List<T>, T> value, @NonNull final String configPath, @NonNull final IConfigStorage storage) {
+        super(value,configPath, storage);
+    }
 
     /**
      * Creates a new ConfigEntry, with the specified value, type and config path.
+     * Will pull the config storage from the {@link ConfigStorage} class.
      * If the value should be printed to the console when it changes, is specified by the printValue parameter.
      * @param value The type and value to be stored in the config
      * @param configPath The path to the value in the config
