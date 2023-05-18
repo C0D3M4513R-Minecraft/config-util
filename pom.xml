@@ -6,16 +6,16 @@
     <parent>
         <groupId>com.c0d3m4513r.pom</groupId>
         <artifactId>plugins</artifactId>
-        <version>0.2.1</version>
+        <version>0.2.4</version>
     </parent>
 
     <properties>
-        <snapshot/>
+        <snapshot>-SNAPSHOT</snapshot>
     </properties>
 
     <groupId>com.c0d3m4513r.config</groupId>
     <artifactId>util</artifactId>
-    <version>1.0.2${snapshot}</version>
+    <version>1.1.0${snapshot}</version>
 
     <licenses>
         <license>
@@ -73,6 +73,7 @@
         <dependency>
             <groupId>com.c0d3m4513r.config</groupId>
             <artifactId>qual</artifactId>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
