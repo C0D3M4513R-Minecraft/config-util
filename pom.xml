@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.c0d3m4513r.pom</groupId>
         <artifactId>plugins</artifactId>
-        <version>0.2.4</version>
+        <version>0.2.5</version>
     </parent>
 
     <properties>
@@ -15,7 +15,7 @@
 
     <groupId>com.c0d3m4513r.config</groupId>
     <artifactId>util</artifactId>
-    <version>1.1.0${snapshot}</version>
+    <version>1.1.1${snapshot}</version>
 
     <licenses>
         <license>
@@ -106,6 +106,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
+                <configuration>
+                    <minimizeJar>true</minimizeJar>
+                    <artifactSet>
+                        <includes>
+                            <include>com.c0d3m4513r.config</include>
+                        </includes>
+                    </artifactSet>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
