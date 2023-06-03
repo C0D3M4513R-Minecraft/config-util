@@ -12,20 +12,15 @@ I generally strive to use [semantic versioning](https://semver.org/) for all my 
 But there are a few exceptions I have to communicate here (mainly because I have seen enough stuff in minecraft projects):
 - The implementation of methods and Classes can change, even in Patch releases.
 - Private methods and variables are considered implementation details.
-- non-public methods and variables on final classes are considered implementation details.
+- methods that are not accessible via regular java code (excluding reflection) is considered a implementation detail (e.g. a proctected method in a final class).
 - Annotations may be added or removed in Patch releases, if the method call is still [binary compatible](https://docs.oracle.com/javase/specs/jls/se17/html/jls-13.html#jls-13.2).
+- Don't rely on dependencies this package uses. I minimise my jar, so they will probably break for you. 
+- com.c0d3m4513r.config:qual will always be included in all Releases (this is a hard requirement, that will only be changed [if ever] in a major release).
 
-This means, that any java bytecode manipulation or java reflection may break in Patch releases.
+- This means, that any java bytecode manipulation or java reflection may break in Patch releases.
 
 
 These rules are only in place, because I publish as java-version 8. If I had java modules, I would probably not have to add these notes.
-
-## Guarantees I will give for Semver:
-For the Dependencies of this project will only be updated in the same or more restrictive way as the project.
-If this project has a patch version bump, then any dependency can also be bumped by a patch version.
-If this project has a minor version bump, then any dependency can be bumped by a minor or patch version.
-If this project has a major version bump, then anything might happen to dependencies.
-
 
 # About the license:
 
