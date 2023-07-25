@@ -1,13 +1,13 @@
 package com.c0d3m4513r.config;
 
 import com.c0d3m4513r.LoggerUtils;
-import lombok.val;
-import lombok.var;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +20,7 @@ public class TimeEntryParserTest {
 
     public static ArrayList<TimeUnitValue> getTimeUnitValues() {
         final ArrayList<TimeUnitValue> list = new ArrayList<>(TimeUnitValueTest.timeUnitValues.size());
-        for (val entry : TimeUnitValueTest.timeUnitValues) {
+        for (final ImmutableTriple<String, Long, TimeUnit> entry : TimeUnitValueTest.timeUnitValues) {
             list.add(new TimeUnitValue(entry.getRight(), entry.getMiddle()));
         }
         return list;
@@ -126,7 +126,7 @@ public class TimeEntryParserTest {
     @DisplayName("Test TimeEntry#getTime(TimeUnit)")
     @Test
     public void getTimeTest() {
-        val test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
+        final TimeEntry test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
         assertEquals(1, test.getTime(TimeUnit.DAYS));
         assertEquals(2, test.getTime(TimeUnit.HOURS));
         assertEquals(3, test.getTime(TimeUnit.MINUTES));
@@ -139,7 +139,7 @@ public class TimeEntryParserTest {
     @DisplayName("Test TimeEntry#addTime(TimeUnit, long)")
     @Test
     public void testAddTime(){
-        val test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
+        final TimeEntry test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
         assertNotNull(test);
         assertEquals(1, test.getTime(TimeUnit.DAYS));
         assertEquals(2, test.getTime(TimeUnit.HOURS));
@@ -148,7 +148,7 @@ public class TimeEntryParserTest {
         assertEquals(5, test.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, test.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, test.getTime(TimeUnit.NANOSECONDS));
-        val add = test.addTime(TimeUnit.DAYS, 10);
+        final TimeEntry add = test.addTime(TimeUnit.DAYS, 10);
         assertNotNull(add);
         assertNotSame(test, add);
         assertEquals(11, add.getTime(TimeUnit.DAYS));
@@ -158,7 +158,7 @@ public class TimeEntryParserTest {
         assertEquals(5, add.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, add.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add.getTime(TimeUnit.NANOSECONDS));
-        val add2 = add.addTime(TimeUnit.HOURS, 10);
+        final TimeEntry add2 = add.addTime(TimeUnit.HOURS, 10);
         assertNotNull(add2);
         assertNotSame(test, add2);
         assertNotSame(add, add2);
@@ -169,7 +169,7 @@ public class TimeEntryParserTest {
         assertEquals(5, add2.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, add2.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add2.getTime(TimeUnit.NANOSECONDS));
-        val add3 = add2.addTime(TimeUnit.MINUTES, 10);
+        final TimeEntry add3 = add2.addTime(TimeUnit.MINUTES, 10);
         assertNotNull(add3);
         assertNotSame(test, add3);
         assertNotSame(add, add3);
@@ -181,7 +181,7 @@ public class TimeEntryParserTest {
         assertEquals(5, add3.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, add3.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add3.getTime(TimeUnit.NANOSECONDS));
-        val add4 = add3.addTime(TimeUnit.SECONDS, 10);
+        final TimeEntry add4 = add3.addTime(TimeUnit.SECONDS, 10);
         assertNotNull(add4);
         assertNotSame(test, add4);
         assertNotSame(add, add4);
@@ -194,7 +194,7 @@ public class TimeEntryParserTest {
         assertEquals(5, add4.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, add4.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add4.getTime(TimeUnit.NANOSECONDS));
-        val add5 = add4.addTime(TimeUnit.MILLISECONDS, 10);
+        final TimeEntry add5 = add4.addTime(TimeUnit.MILLISECONDS, 10);
         assertNotNull(add5);
         assertNotSame(test, add5);
         assertNotSame(add, add5);
@@ -208,7 +208,7 @@ public class TimeEntryParserTest {
         assertEquals(15, add5.getTime(TimeUnit.MILLISECONDS));
         assertEquals(6, add5.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add5.getTime(TimeUnit.NANOSECONDS));
-        val add6 = add5.addTime(TimeUnit.MICROSECONDS, 10);
+        final TimeEntry add6 = add5.addTime(TimeUnit.MICROSECONDS, 10);
         assertNotNull(add6);
         assertNotSame(test, add6);
         assertNotSame(add, add6);
@@ -223,7 +223,7 @@ public class TimeEntryParserTest {
         assertEquals(15, add6.getTime(TimeUnit.MILLISECONDS));
         assertEquals(16, add6.getTime(TimeUnit.MICROSECONDS));
         assertEquals(7, add6.getTime(TimeUnit.NANOSECONDS));
-        val add7 = add6.addTime(TimeUnit.NANOSECONDS, 10);
+        final TimeEntry add7 = add6.addTime(TimeUnit.NANOSECONDS, 10);
         assertNotNull(add7);
         assertNotSame(test, add7);
         assertNotSame(add, add7);
@@ -246,7 +246,7 @@ public class TimeEntryParserTest {
     public void parseSingleString() {
         {
             final StringBuilder sb = new StringBuilder();
-            for (val entry : TimeUnitValueTest.timeUnitValues) {
+            for (final ImmutableTriple<String, Long, TimeUnit> entry : TimeUnitValueTest.timeUnitValues) {
                 sb.append(entry.getMiddle()).append(entry.getLeft());
             }
             final String parse = sb.toString();
@@ -263,7 +263,7 @@ public class TimeEntryParserTest {
         final long absValue = 150;
         {
             final StringBuilder sb = new StringBuilder();
-            for (val entry : TimeUnitValueTest.timeUnitValues) {
+            for (final ImmutableTriple<String, Long, TimeUnit> entry : TimeUnitValueTest.timeUnitValues) {
                 if (entry.getMiddle() >= 0) sb.append(entry.getMiddle()).append(entry.getLeft());
             }
             final String parse = sb.toString();
@@ -284,7 +284,7 @@ public class TimeEntryParserTest {
     public void parseArray() {
         final long absValue = 150;
         {
-            val parse = getTimeUnitValues().toArray(new TimeUnitValue[0]);
+            final TimeUnitValue[] parse = getTimeUnitValues().toArray(new TimeUnitValue[0]);
             TimeEntry te = TimeEntry.of(parse);
             assertNotNull(te);
             assertEquals(0, te.getDays());
@@ -296,9 +296,9 @@ public class TimeEntryParserTest {
             assertEquals(0, te.getNs());
         }
         {
-            val parse = getTimeUnitValues();
+            final List<TimeUnitValue> parse = getTimeUnitValues();
             parse.removeIf(timeUnitValue -> timeUnitValue.getValue() < 0);
-            val parseArray = parse.toArray(new TimeUnitValue[0]);
+            final TimeUnitValue[] parseArray = parse.toArray(new TimeUnitValue[0]);
             TimeEntry te = TimeEntry.of(parseArray);
             assertNotNull(te);
             assertEquals(absValue * 3, te.getDays());
@@ -316,7 +316,7 @@ public class TimeEntryParserTest {
     public void parseIterable() {
         final long absValue = 150;
         {
-            val parse = getTimeUnitValues();
+            final List<TimeUnitValue> parse = getTimeUnitValues();
             TimeEntry te = TimeEntry.of(parse);
             assertNotNull(te);
             assertEquals(0, te.getDays());
@@ -328,7 +328,7 @@ public class TimeEntryParserTest {
             assertEquals(0, te.getNs());
         }
         {
-            val parse = getTimeUnitValues();
+            final List<TimeUnitValue> parse = getTimeUnitValues();
             parse.removeIf(timeUnitValue -> timeUnitValue.getValue() < 0);
             TimeEntry te = TimeEntry.of(parse);
             assertNotNull(te);
@@ -345,9 +345,9 @@ public class TimeEntryParserTest {
     @DisplayName("Test TimeEntry#of(TimeUnitValue)")
     @Test
     public void testOfTUV(){
-        var tuv = new TimeUnitValue(TimeUnit.DAYS, 10);
+        TimeUnitValue tuv = new TimeUnitValue(TimeUnit.DAYS, 10);
         assertNotNull(tuv);
-        var te = TimeEntry.of(tuv);
+        TimeEntry te = TimeEntry.of(tuv);
         assertNotNull(te);
         assertEquals(10, te.getDays());
         assertEquals(0, te.getHours());
@@ -427,7 +427,7 @@ public class TimeEntryParserTest {
     @DisplayName("Test TimeEntry#setTime(TimeUnit, long)")
     @Test
     public void setTimeTest() {
-        var test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
+        TimeEntry test = new TimeEntry(1, 2, 3, 4, 5, 6, 7);
         assertEquals(1, test.getTime(TimeUnit.DAYS));
         assertEquals(2, test.getTime(TimeUnit.HOURS));
         assertEquals(3, test.getTime(TimeUnit.MINUTES));

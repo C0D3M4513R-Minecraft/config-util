@@ -11,6 +11,7 @@ import org.checkerframework.dataflow.qual.SideEffectFree;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Data
@@ -55,31 +56,24 @@ public class TimeEntry implements Comparable<TimeEntry> {
     }
     @SideEffectFree
     @SuppressWarnings("purity.not.sideeffectfree.assign.field")
-    public TimeEntry(final TimeUnit unit, final long value, @org.checkerframework.checker.nullness.qual.NonNull final TimeEntry timeEntry){
+    public TimeEntry(final @NonNull TimeUnit unit, final long value, @org.checkerframework.checker.nullness.qual.NonNull final TimeEntry timeEntry){
         this(timeEntry);
-        switch (unit){
-            case NANOSECONDS:
-                ns = value;
-                break;
-            case MICROSECONDS:
-                us = value;
-                break;
-            case MILLISECONDS:
-                ms = value;
-                break;
-            case SECONDS:
-                seconds = value;
-                break;
-            case MINUTES:
-                minutes = value;
-                break;
-            case HOURS:
-                hours = value;
-                break;
-            case DAYS:
-                days = value;
-                break;
-            default: throw new IllegalArgumentException("Too many enum variants");
+        if (unit == TimeUnit.NANOSECONDS) {
+            ns = value;
+        } else if (unit == TimeUnit.MICROSECONDS) {
+            us = value;
+        } else if (unit == TimeUnit.MILLISECONDS) {
+            ms = value;
+        } else if (unit == TimeUnit.SECONDS) {
+            seconds = value;
+        } else if (unit == TimeUnit.MINUTES) {
+            minutes = value;
+        } else if (unit == TimeUnit.HOURS) {
+            hours = value;
+        } else if (unit == TimeUnit.DAYS) {
+            days = value;
+        } else {
+            throw new IllegalArgumentException("Too many enum variants");
         }
     }
 
@@ -88,17 +82,23 @@ public class TimeEntry implements Comparable<TimeEntry> {
      * @return Returns the time amount of the given unit
      */
     @Pure
-    public long getTime(TimeUnit unit){
-        switch (unit){
-            case NANOSECONDS: return ns;
-            case MICROSECONDS: return us;
-            case MILLISECONDS: return ms;
-            case SECONDS: return seconds;
-            case MINUTES: return minutes;
-            case HOURS: return hours;
-            case DAYS: return days;
-            default: throw new RuntimeException("Too many enum variants");
+    public long getTime(@NonNull TimeUnit unit){
+        if (unit == TimeUnit.NANOSECONDS) {
+            return ns;
+        } else if (unit == TimeUnit.MICROSECONDS) {
+            return us;
+        } else if (unit == TimeUnit.MILLISECONDS) {
+            return ms;
+        } else if (unit == TimeUnit.SECONDS) {
+            return seconds;
+        } else if (unit == TimeUnit.MINUTES) {
+            return minutes;
+        } else if (unit == TimeUnit.HOURS) {
+            return hours;
+        } else if (unit == TimeUnit.DAYS) {
+            return days;
         }
+        throw new RuntimeException("Too many enum variants");
     }
 
     /**
@@ -158,27 +158,27 @@ public class TimeEntry implements Comparable<TimeEntry> {
         @s(Prefix.nano) long ns = 0;
         for (val parsed:times) {
             if (parsed == null) return null;
-            switch (parsed.getUnit()) {
-                case DAYS:
-                    days += parsed.getValue();
-                    continue;
-                case HOURS:
-                    hours += parsed.getValue();
-                    continue;
-                case MINUTES:
-                    minutes += parsed.getValue();
-                    continue;
-                case SECONDS:
-                    seconds += parsed.getValue();
-                    continue;
-                case MILLISECONDS:
-                    ms += parsed.getValue();
-                    continue;
-                case MICROSECONDS:
-                    us += parsed.getValue();
-                    continue;
-                case NANOSECONDS:
-                    ns += parsed.getValue();
+            final TimeUnit unit = parsed.getUnit();
+            if (unit == TimeUnit.DAYS) {
+                days += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.HOURS) {
+                hours += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.MINUTES) {
+                minutes += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.SECONDS) {
+                seconds += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.MILLISECONDS) {
+                ms += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.MICROSECONDS) {
+                us += parsed.getValue();
+                continue;
+            } else if (unit == TimeUnit.NANOSECONDS) {
+                ns += parsed.getValue();
             }
         }
         return new TimeEntry(days, hours, minutes, seconds, ms, us, ns);
@@ -191,16 +191,23 @@ public class TimeEntry implements Comparable<TimeEntry> {
      */
     @SideEffectFree
     public static @NonNull TimeEntry of(@NonNull TimeUnitValue tuv){
-        switch (tuv.getUnit()){
-            case DAYS: return new TimeEntry(tuv.getValue(),0,0,0,0,0,0);
-            case HOURS: return new TimeEntry(0,tuv.getValue(),0,0,0,0,0);
-            case MINUTES: return new TimeEntry(0,0,tuv.getValue(),0,0,0,0);
-            case SECONDS: return new TimeEntry(0,0,0,tuv.getValue(),0,0,0);
-            case MILLISECONDS: return new TimeEntry(0,0,0,0,tuv.getValue(),0,0);
-            case MICROSECONDS: return new TimeEntry(0,0,0,0,0,tuv.getValue(),0);
-            case NANOSECONDS: return new TimeEntry(0,0,0,0,0,0,tuv.getValue());
-            default: throw new IllegalArgumentException("Too many enum variants");
+        final TimeUnit unit = tuv.getUnit();
+        if (unit == TimeUnit.DAYS) {
+            return new TimeEntry(tuv.getValue(), 0, 0, 0, 0, 0, 0);
+        } else if (unit == TimeUnit.HOURS) {
+            return new TimeEntry(0, tuv.getValue(), 0, 0, 0, 0, 0);
+        } else if (unit == TimeUnit.MINUTES) {
+            return new TimeEntry(0, 0, tuv.getValue(), 0, 0, 0, 0);
+        } else if (unit == TimeUnit.SECONDS) {
+            return new TimeEntry(0, 0, 0, tuv.getValue(), 0, 0, 0);
+        } else if (unit == TimeUnit.MILLISECONDS) {
+            return new TimeEntry(0, 0, 0, 0, tuv.getValue(), 0, 0);
+        } else if (unit == TimeUnit.MICROSECONDS) {
+            return new TimeEntry(0, 0, 0, 0, 0, tuv.getValue(), 0);
+        } else if (unit == TimeUnit.NANOSECONDS) {
+            return new TimeEntry(0, 0, 0, 0, 0, 0, tuv.getValue());
         }
+        throw new IllegalArgumentException("Too many enum variants");
     }
 
     @SideEffectFree

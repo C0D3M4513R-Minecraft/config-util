@@ -11,6 +11,8 @@
 
     <properties>
         <snapshot>-SNAPSHOT</snapshot>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <groupId>com.c0d3m4513r.config</groupId>
