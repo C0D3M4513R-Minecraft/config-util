@@ -11,11 +11,13 @@
 
     <properties>
         <snapshot>-SNAPSHOT</snapshot>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <groupId>com.c0d3m4513r.config</groupId>
     <artifactId>util</artifactId>
-    <version>1.1.1${snapshot}</version>
+    <version>1.2.0${snapshot}</version>
 
     <licenses>
         <license>

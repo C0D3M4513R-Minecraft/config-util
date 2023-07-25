@@ -6,6 +6,8 @@ import org.checkerframework.common.returnsreceiver.qual.This;
 import org.checkerframework.dataflow.qual.Deterministic;
 import org.checkerframework.dataflow.qual.Pure;
 
+import java.util.List;
+
 public interface IConfigSaver extends IConfigProvider{
     /**
      * This needs to be Async safe.
@@ -30,12 +32,11 @@ public interface IConfigSaver extends IConfigProvider{
      * @param value Value to be stored in the config
      * @return if the value was saved
      * @param <T> Type of Data stored in the config
-     * @param <V> List Type
      */
     @Pure
     //this is pure, because this does not actually save the value to the config file. This caches the value in memory.
     //And Caching is expressively allowed in a Pure method.
-    <V,T> boolean saveConfigKeyList(@Nullable V value, @NonNull Class<T> typeToken, @NonNull String path);
+    <T> boolean saveConfigKeyList(@Nullable List<T> value, @NonNull Class<T> typeToken, @NonNull String path);
 
     /**
      * Saves the modified keys to the actual config file

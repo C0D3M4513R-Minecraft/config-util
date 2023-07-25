@@ -52,7 +52,7 @@ public final class ConfigStorage {
 
         @Override
         @Pure
-        public <V, T> boolean saveConfigKeyList(@Nullable V value, @NonNull Class<T> typeToken, @NonNull String path) {
+        public <T> boolean saveConfigKeyList(@Nullable List<T> value, @NonNull Class<T> typeToken, @NonNull String path) {
             return false;
         }
 

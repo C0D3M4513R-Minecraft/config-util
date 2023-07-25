@@ -3,9 +3,8 @@ package com.c0d3m4513r.config;
 import com.c0d3m4513r.LoggerUtils;
 import com.c0d3m4513r.Tuple;
 import com.c0d3m4513r.logger.Logging;
-import lombok.val;
-import lombok.var;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.checkerframework.checker.nullness.qual.KeyFor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
@@ -32,7 +31,7 @@ public class TimeUnitValueTest {
     static{
         ArrayList<ImmutableTriple<String, Long, TimeUnit>> array = new ArrayList<>(Convert.timeUnitEntries.size() * timeValues.length);
         long absValue1 = 0;
-        for (val entry : Convert.timeUnitEntries) {
+        for (final Map.Entry<@NonNull String, @NonNull TimeUnit> entry : Convert.timeUnitEntries) {
             for (Long value : timeValues) {
                 absValue1 += value;
                 array.add(new ImmutableTriple<>(entry.getKey(), value, entry.getValue()));
@@ -50,9 +49,9 @@ public class TimeUnitValueTest {
     @Test
     @DisplayName("Test TimeUnitValue#new(TimeUnit, Long)")
     public void testNew(){
-        for (val value : timeValues) {
-            for (val unit: TimeUnit.values()) {
-                    val tuv = new TimeUnitValue(unit, value);
+        for (final Long value : timeValues) {
+            for (final TimeUnit unit: TimeUnit.values()) {
+                    final TimeUnitValue tuv = new TimeUnitValue(unit, value);
                     assertNotNull(tuv);
                     assertEquals(unit, tuv.getUnit());
                     assertEquals(value, tuv.getValue());
@@ -64,9 +63,9 @@ public class TimeUnitValueTest {
     @MethodSource("singleValues")
     @DisplayName("Test SingleValues TimeUnitValue#ofInternal(String)")
     public void testSingleValueOfInternal(final ImmutableTriple<String, Long, TimeUnit> entry){
-        val unitString = entry.getLeft();
-        val value = entry.getMiddle();
-        val unit = entry.getRight();
+        final String unitString = entry.getLeft();
+        final Long value = entry.getMiddle();
+        final TimeUnit unit = entry.getRight();
         final String parse = value + unitString;
         Logging.INSTANCE.info("Parsing: {}", parse);
         final @Nullable Tuple<@NonNull String, @Nullable TimeUnitValue> retValue = TimeUnitValue.ofInternal(parse);
@@ -83,7 +82,7 @@ public class TimeUnitValueTest {
     @DisplayName("Test MultipleValues TimeUnitValue#ofInternal(String)")
     public void testMultipleValueOfInternal(){
         final StringBuilder sb = new StringBuilder();
-        for (val entry : timeUnitValues) {
+        for (final ImmutableTriple<String, Long, TimeUnit> entry : timeUnitValues) {
             sb.append(entry.getMiddle()).append(entry.getLeft());
         }
         final String parse = sb.toString();
@@ -100,7 +99,7 @@ public class TimeUnitValueTest {
             remaining = retValue.getLeft();
             parsed = retValue.getRight();
             if (--i < 0) fail("Parsed more elements than expected.");
-            val entry = timeUnitValues.get(i);
+            final ImmutableTriple<String, Long, TimeUnit> entry = timeUnitValues.get(i);
             assertNotNull(parsed);
             assertEquals(entry.getRight(), parsed.getUnit());
             assertEquals(entry.getMiddle(), parsed.getValue());
@@ -111,9 +110,9 @@ public class TimeUnitValueTest {
     @MethodSource("singleValues")
     @DisplayName("Test TimeUnitValue#of(String)")
     public void testParseTimeUnitValueSingle(final ImmutableTriple<String, Long, TimeUnit> entry) {
-        val unitString = entry.getLeft();
-        val value = entry.getMiddle();
-        val unit = entry.getRight();
+        final String unitString = entry.getLeft();
+        final Long value = entry.getMiddle();
+        final TimeUnit unit = entry.getRight();
         final String parse = value + unitString;
         Logging.INSTANCE.info("Parsing: {}", parse);
         final TimeUnitValue timeUnitValue = TimeUnitValue.of(parse);
@@ -127,8 +126,8 @@ public class TimeUnitValueTest {
     @MethodSource("singleValues")
     @DisplayName("Test TimeUnitValue#of(String, String)")
     public void testParseTimeUnitValueSeperateUnitValue(final ImmutableTriple<String, Long, TimeUnit> entry){
-        val value = entry.getMiddle();
-        val parsed = TimeUnitValue.of(entry.getLeft(), value.toString());
+        final Long value = entry.getMiddle();
+        final TimeUnitValue parsed = TimeUnitValue.of(entry.getLeft(), value.toString());
         assertNotNull(parsed);
         assertEquals(parsed.getValue(), value);
         assertEquals(parsed.getUnit(), entry.getRight());
@@ -138,17 +137,17 @@ public class TimeUnitValueTest {
     @DisplayName("Test TimeEntry#ofList(String)")
     public void testParseTimeUnitValueList(){
         final StringBuilder sb = new StringBuilder();
-        for (val entry : timeUnitValues) {
+        for (final ImmutableTriple<String, Long, TimeUnit> entry : timeUnitValues) {
             sb.append(entry.getMiddle()).append(entry.getLeft());
         }
         final String parse = sb.toString();
-        val parsed = TimeUnitValue.ofList(parse);
+        final List<TimeUnitValue> parsed = TimeUnitValue.ofList(parse);
         final ListIterator<TimeUnitValue> parsedIterator = parsed.listIterator(parsed.size());
         final Iterator<ImmutableTriple<String, Long, TimeUnit>> expectedIterator = timeUnitValues.iterator();
         int i = 0;
         while(parsedIterator.hasPrevious() && expectedIterator.hasNext()){
-            val parsedEntry = parsedIterator.previous();
-            val expectedEntry = expectedIterator.next();
+            final TimeUnitValue parsedEntry = parsedIterator.previous();
+            final ImmutableTriple<String, Long, TimeUnit> expectedEntry = expectedIterator.next();
             Logging.INSTANCE.info("[test] {} Parsed: {} as {} {}", i++, expectedEntry.getMiddle()+expectedEntry.getLeft(), parsedEntry.getValue(), parsedEntry.getUnit());
             assertEquals(expectedEntry.getRight(), parsedEntry.getUnit());
             assertEquals(expectedEntry.getMiddle(), parsedEntry.getValue());
@@ -163,8 +162,8 @@ public class TimeUnitValueTest {
     @Test
     @DisplayName("Test TimeUnitValue#equals(TimeUnitValue)")
     public void testEqualsTimeUnitValue(){
-        var timeUnitValue = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
-        var test = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
+        TimeUnitValue timeUnitValue = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
+        TimeUnitValue test = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
         assertEquals(timeUnitValue, test);
         assertEquals(timeUnitValue, timeUnitValue);
         assertEquals(test, test);
@@ -328,7 +327,7 @@ public class TimeUnitValueTest {
 
     @SuppressWarnings("EqualsWithItself")
     private static void testLTEQGTCompare(TimeUnitValue timeUnitValue, TimeUnit unit, long expectedValue){
-        var test = new TimeUnitValue(unit, expectedValue);
+        TimeUnitValue test = new TimeUnitValue(unit, expectedValue);
         assertEquals(0, test.compareTo(test));
         assertEquals(0, timeUnitValue.compareTo(test));
         assertEquals(0, test.compareTo(timeUnitValue));
@@ -344,8 +343,8 @@ public class TimeUnitValueTest {
 
     @SuppressWarnings("EqualsWithItself")
     private static void testLTZCompare(TimeUnitValue timeUnitValue){
-        for(val unit : TimeUnit.values()){
-            val test = new TimeUnitValue(unit, 0);
+        for(final TimeUnit unit : TimeUnit.values()){
+            final TimeUnitValue test = new TimeUnitValue(unit, 0);
             assertEquals(0, test.compareTo(test));
             assertEquals(1, timeUnitValue.compareTo(test));
             assertEquals(-1, test.compareTo(timeUnitValue));
@@ -362,9 +361,9 @@ public class TimeUnitValueTest {
     @DisplayName("Test TimeUnitValue#compareTo(TimeUnitValue)")
     @SuppressWarnings("EqualsWithItself")//in prod. code this would be redundant, but I'm testing the compliance of the CompareTo method, to the requirements of the Comparable interface
     public void testCompareToTimeUnitValue(){
-        var timeUnitValue = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
+        TimeUnitValue timeUnitValue = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
         testLTZCompare(timeUnitValue);
-        var test = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
+        TimeUnitValue test = new TimeUnitValue(TimeUnit.NANOSECONDS, 1);
         assertEquals(0, timeUnitValue.compareTo(timeUnitValue));
         testCompareTo(timeUnitValue, test, 0);
         test = new TimeUnitValue(TimeUnit.NANOSECONDS, 2);

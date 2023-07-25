@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @Time
 @Getter(onMethod_ = {@Pure})
 public class TimeUnitValue implements Comparable<TimeUnitValue> {
-    TimeUnit unit;
+    @lombok.NonNull TimeUnit unit;
     long value;
 
     /**
